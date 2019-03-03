@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.views import status
@@ -56,3 +57,31 @@ class BankBranchesView(generics.ListAPIView):
                 },
                 status=status.HTTP_404_NOT_FOUND
             )
+
+
+def index(request):
+    html = """
+            <!DOCTYPE html>
+            <html lang="en">
+
+            <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta http-equiv="X-UA-Compatible" content="ie=edge">
+            <title>Bank REST SERVICE</title>
+            </head>
+
+            <body>
+            <h3>Endpoints Available</h3>
+            <h5>1. GET /api/v1/branch/&lt;ifsc&gt;/</h5>
+            <ul>
+                <li>Example: /api/v1/branch/YESB0ZSBL10/</li>
+            </ul>
+            <h5>2. GET /api/v1/bank/&lt;bank-name&gt;/city/&lt;city&gt;/</h5>
+            <ul>
+                <li>Example: /api/v1/bank/ZILA-SAHAKRI-BANK-LIMITED-GHAZIABAD/city/HAPUR/</li>
+            </ul>
+            </body>
+
+            </html>"""
+    return HttpResponse(html)
